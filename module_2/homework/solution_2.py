@@ -11,7 +11,6 @@ def  binary_find_element(list_int, element):
         if end_list == 0:
             return False
             
-
         elif list_int[mid_element] == element:
             return True
 

@@ -1,26 +1,34 @@
-from typing import Literal
+class  Library:
 
-class Animal:
-    def __init__(
-            self,
-            type_animal,
-            animal_sounds,
-            type_animal_food: Literal['всеядный', 'плотоядный', 'травоядный']
-    ):
-        self.type_animal = type_animal
-        self.animal_sounds = animal_sounds
-        self.type_animal_food = type_animal_food
+    def __init__(self):
+        self.list_book = []
+        
     
-    def __str__(self):
-        return f'Это {self.type_animal} животное {self.type_animal_food},'
+    def add_book(self, title_book, author_book): # добавляем книгу
+        self.list_book.append({'title_book': title_book, 'author_book': author_book})
+        return self
     
-    def sounds(self):
-        return f'{self.type_animal} "говорит" {self.animal_sounds}'
+    def remove_book(self, title_book): # удаляем книгу
+        for i in self.list_book:
+            if i['title_book'] == title_book:
+                self.list_book.remove(i)
+                return self
+        return self
     
-animal_1 = Animal('волк', "ауууу", "плотоядное")
-animal_2 = Animal("корова", "мууу", "травоядное")
-animal_3 = Animal("кошка", "мяу", "плотоядное")
+    def __getitem__(self, index): # находим книгу по индуксу
+        return self.list_book[index]
 
-print(animal_1, animal_1.sounds())
-print(animal_2, animal_2.sounds())
-print(animal_3, animal_3.sounds())
+    def __contains__(self, title_book): # проверка библиотеки на наличие книги
+        for i in self.list_book:
+            if i['title_book'] == title_book:
+                return True
+        return False
+        
+library = Library()
+
+library.add_book('Книга1', 'Автор1').add_book('Книга2', "Автор2").remove_book("Книга1").add_book('Книга 3', "Автор 3").add_book("Книга 4", "Автор 4")
+print(library.list_book)
+
+print(library[2])
+
+print('Книга 7' in library)
